@@ -1,37 +1,50 @@
-# Make the cutest picture — "Mochi the kitten"
+# Mochi in a Strawberry Basket — version 4
 
-Entry for the make.fun bounty **"Make the cutest picture"**
-(https://make.fun/bounty/cutest-picture-01) — $250 prize pool, 20 places,
-closes Friday 13 Nov 2026 10:00 UTC (17:00 WIB).
+A program entry for the make.fun bounty **"Make the cutest picture"**
+(cutest-picture-01).
 
-## What it draws
+## What the picture shows
 
-A big-eyed cream kitten ("Mochi") sitting in a flower meadow under a soft
-pastel sky: huge glossy eyes with sparkle highlights, pink nose and blush,
-whiskers, a pink bow on one ear, a curled tail with an orange tip, a
-butterfly, a ball of pink yarn, floating hearts and paw prints, sunshine
-and clouds.
+A fluffy baby kitten in an oversized pastel pink bunny hoodie, sitting
+inside a tiny strawberry-shaped basket and hugging a miniature yellow
+plush duck with its tiny paws. The kitten has huge sparkling eyes, a
+tiny pink nose, chubby cheeks, and a little tongue sticking out.
+Around it float pastel pink hearts, tiny strawberries, soft flowers,
+and magical sparkles, on a dreamy pastel pink and cream background
+with warm golden sunlight.
 
-## How to run
+The image was generated from the user's own prompt with an image
+model. It is bundled with the entry as `entry.png`.
+
+## How the program works
+
+This entry follows the competition kit's own starter pattern: the
+simplest entry is a repository holding the image and a one-line
+program that copies it to the output directory. `main.py` does exactly
+that — it locates `entry.png` next to itself and copies it byte-for-byte
+to `<output_dir>/entry.png`, then prints the SHA-256 and size of the
+copied file so the copy can be checked.
+
+- The output directory comes from the `MAKEFUN_OUTPUT_DIR` environment
+  variable and defaults to `/output` (the grader's writable directory;
+  the repository itself is read-only in the grading container).
+- Python 3.13, standard library only (`hashlib`, `os`, `shutil`,
+  `pathlib`). No network access, no third-party packages, fully
+  deterministic: every run produces the identical bytes.
+
+## How to run it
 
 ```sh
-python3 main.py            # writes /output/entry.png
-ENTRY_PATH=./entry.png python3 main.py   # write somewhere else (testing)
+python3 main.py
+# or, outside the grader's container:
+mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
 ```
 
-- **Language/runtime:** Python 3.13, **stdlib only** — the PNG encoder is
-  hand-written (zlib + a small RGB rasterizer), so the program runs in any
-  bare Python 3.13 sandbox with no third-party packages and no network.
-- **Output:** `/output/entry.png`, 1024×1024 px, RGB PNG.
-- **Determinism:** fixed seed (`SEED = 20261114`), no network, no wall
-  clock, no timestamps in the PNG. Two runs produce byte-identical output
-  (verified: same SHA-256 on repeated runs, see BUILD_LOG.md).
+## Output
 
-## Files
-
-- `main.py` — the entry program (repo root, as the brief requires)
-- `entry.png` — the generated output (180,150 bytes, under the 1 MiB limit)
-- `LICENSE` — MIT
+- `entry.png` — 683×1024, JPEG bytes, 171,344 bytes (under the 1 MiB
+  limit), SHA-256
+  `a65c9be0000d85bbea7248e1465aad54b5efe1048096799c85d140bad5844cdc`.
 
 ## License
 
